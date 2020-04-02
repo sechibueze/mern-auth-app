@@ -64,6 +64,24 @@ Response:
   }
 }
 </code></pre>
+
+- `/users/me GET get user data`
+<pre><code>
+Headers: `x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlODVhNjVhZmVlM2IzMTQxOGU5MTVjZSIsImlhdCI6MTU4NTg1NjcxMn0.gKluzjtKUIPyjB-rD8RZja8r2swrUWnU8eJosNvEMIU`
+
+Response: 
+{
+  "status": true,
+  "message": "Requested user",
+  "user": {
+    "id": "5e85a65afee3b31418e915ce",
+    "firstname": "Samuel",
+    "lastname": "Chibueze",
+    "email": "samify@gmail.com"
+  }
+}
+</code></pre>
+
 ## Resources
 - `https://jwt.io/`
 

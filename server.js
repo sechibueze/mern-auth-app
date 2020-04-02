@@ -21,9 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 // Controllers
 const signupController = require('./controllers/signup');
 const loginController = require('./controllers/login');
+const usersController = require('./controllers/users');
 // Routes
 app.use('/signup', signupController);
 app.use('/login', loginController);
+app.use('/users', usersController);
 
 app.use((req, res) => {
   return res.status(200).json({
