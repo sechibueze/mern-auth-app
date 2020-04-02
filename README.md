@@ -44,7 +44,26 @@ Response: {
 }
 </code></pre>
 - `/login POST user-login`
+<pre><code>
+Request: 
+{
+	"email": "samify@gmail.com",
+  "password": "samify"
+}
+Response: 
 
+{
+  "status": true,
+  "message": "User login was successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlODVhNjVhZmVlM2IzMTQxOGU5MTVjZSIsImlhdCI6MTU4NTg1Mzc0OH0.2FTHdos9hn8OCcMj6hNfwhdzhVrUqOuzQp1rdYH5LS8",
+  "user": {
+    "id": "5e85a65afee3b31418e915ce",
+    "firstname": "Samuel",
+    "lastname": "Chibueze",
+    "email": "samify@gmail.com"
+  }
+}
+</code></pre>
 ## Resources
 - `https://jwt.io/`
 

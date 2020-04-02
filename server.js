@@ -20,11 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Controllers
 const signupController = require('./controllers/signup');
-
+const loginController = require('./controllers/login');
 // Routes
 app.use('/signup', signupController);
+app.use('/login', loginController);
+
 app.use((req, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     status: true,
     message: 'Welcome to the MERNstack auth app'
   });
