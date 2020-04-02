@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { config } = require('dotenv');
+config();
 const uri = process.env.MONGODBURI || 'mongodb://localhost:27017/mern-auth-app';
 mongoose.connect(uri,
   {
@@ -14,6 +16,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 // Parse request body
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Controllers
 const signupController = require('./controllers/signup');
