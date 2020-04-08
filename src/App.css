@@ -28,13 +28,213 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
 }
+
+/* -------------------------------
+ Global
+---------------------------------*/
 *{
+  box-sizing: border-box;
   font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
 }
-#login-form{
+
+a{
+  text-decoration: none;
+}
+ul, li{
+  list-style-type: none;
+}
+textarea{
+  resize: none;
+}
+.container{
+  display: block;;
+  width: 80%;
+  margin: auto;
+}
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.show{
+  display: block;
+}
+
+/* -------------------------------
+**** NAvbar
+---------------------------*/
+
+#navbar{
+  display: block;
+  padding: 20px;
+  color: var(--light);
+  background-color: var(--dark);
+}
+.logo{
+  float: left;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.menu-icon-toggler{
+  display: none;
+  float: right;
+  font-weight: 700;
+}
+.navlinks{
+  float: right;
+}
+
+.navlinks .navlink{
+  padding: 2px 10px;
+  letter-spacing: 1.5px;
+  color: var(--light);
+}
+
+.navlinks .navlink:hover{
+  text-decoration: none;
+  opacity: 0.7;
+}
+/* -----------------------------------
+------------- Tweetfeed
+------------------------------------*/
+.tweetfeed{
+  margin: auto;
+  width: 60%;
+  text-align: left;
+  padding: 12px 20px;
+}
+
+.tweet{
+  padding: 12px 0px;
+  border-bottom: 1px solid;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  border-radius: 9px;
+}
+
+.tweet-content{
+  padding: 10px;
+}
+
+.tweeter{
+  font-size: .8rem;
+  font-style: italic;
+  padding: 10px;
+}
+
+/* -------------------------
+------------- Modal
+----------------------------------- */
+.close-modal{
+  font-weight: 700;
+  color: var(--light);
+  font-size: 1.6em;
+  float: right;
+  padding-right: 12px;
+  cursor: pointer;
+}
+
+.modal{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  overflow: auto;
+  background-color: var(--dark);
+  opacity: 0.9;
+}
+.modal.show{
+  display: block;
+}
+.modal-content{
+  top: 100px;
+  color: var(--light);
+  padding: 20px;
+  margin: auto;
+  width: 80%;
+  background-color: var(--light);
+  color: var(--dark);
+  border: 1px solid var(--danger);
+  animation: top-down 2000 ease-in;
+}
+
+@keyframes top-down{
+  0%{
+    margin-top: -200px;
+  }
+  100%{
+    margin-top: 120px;
+  }
+}
+.modal-header{
+  background-color: var(--dark);
+  color: var(--light);
+  padding: 15px 0px;
+}
+.modal-title{
+  display: inline;
+  text-align: left;
+  padding-left: 12px;
+}
+.modal-body{
+  padding: 15px 12px;
+  background-color: #ddd;
+}
+.modal-footer{
+   background-color: #ddd;
+  color: var(--dark);
+  padding: 15px 12px;
+}
+/* #login-form{
   background: #007bff;
   background: linear-gradient(to right, #0062E6, #33AEFF);
   color: #212529;
+} */
+/* -------------------------
+--------------- Forms
+------------------------------------------------------------ */
+.form-group{
+  display: block;
+  padding: 10px 0px;
+  text-align: left; 
+  font-size: 1.15rem;
+}
+.form-group label{
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-left: 12px;
+  letter-spacing: 1.5px;
+}
+.form-group .form-control{
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0px;
+  outline: 1px;
+  font-size: 1.15rem;
+  letter-spacing: 1.5px;
+  background-color: var(--white);
+}
+
+/* -------------------------------
+-------------Button
+------------------------------------------ */
+.btn{
+  
+  color: var(--dark);
+  border-radius: 9px;
+}
+.btn.btn-primary{
+  background-color: var(--blue);
+}
+.btn:hover{
+  opacity: .9;
 }
 
 /* --------------------------------------
@@ -50,3 +250,63 @@
 #footer .copyright, #footer .copyright a{
   color: var(--light);
 }
+/* ---------------------------------
+* Applies at width less than 576px
+--------------------------------*/
+@media (max-width: 576px){
+  body{
+    background-color: red;
+  }
+}
+
+/* ---------------------------------
+* Applies at width less than 768px
+--------------------------------*/
+@media  (max-width: 768px){
+  
+  /* --- show .menu-icon-toggler  */
+  .menu-icon-toggler{
+    display: inline-block;
+  }
+  .navlinks{
+    display: none;
+  }
+
+  /* -- When .navlinks-toggle is added to .navbar */
+  .navlinks-toggle .navlinks{
+    float: none;
+    display: block;
+  }
+  .navlinks-toggle .navlinks::before{
+    content: '';
+    display: block;
+    clear: both;
+    padding: 12px;
+  }
+  .navlinks-toggle .navlinks .navlink{
+    display: block;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  
+}
+
+/* ---------------------------------
+* Applies at width less than 992px
+--------------------------------*/
+@media (max-width: 992px){
+  body{
+    background-color: green;
+  }
+}
+
+/* ---------------------------------
+* Applies at width less than 1200px
+--------------------------------*/
+@media (max-width: 1200px){
+  body{
+    background-color: transparent;
+  }
+}
+

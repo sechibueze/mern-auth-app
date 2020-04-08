@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
+import NavLink from './NavLink';
+import LoginModal from './modals/LoginModal';
+import RegisterModal from './modals/RegisterModal';
+import CreateTweet from './modals/CreateTweet';
 class Navbar extends Component {
-  state = {}
+  state = {
+    open: false,
+    isModalOpen: false
+  }
+
+  toggleNavlinks = _ => {
+    this.setState({ open: !this.state.open })
+  }
+
   render() {
+    const { open } = this.state;
+    const navlinksState = open ? 'navlinks-toggle' : '';
     return (
-      <nav>
-        <div className='logo'>MERNstack</div>
-        <div className='navlinks'>
-          <Link to='/'>Home</Link>
-          <Link to='/register'>Register</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/account'>Account</Link>
+      <nav id='navbar' className={navlinksState}>
+        <div className='container clearfix '>
+          <div className='logo'>Tweeters</div>
+          <span className='menu-icon-toggler' onClick={this.toggleNavlinks}>MENU</span>
+          <div className='navlinks'>
+            <NavLink label='Tweets' />
+            {/* <NavLink label='Create' /> */}
+            <CreateTweet />
+            <RegisterModal />
+            <LoginModal />
+            <NavLink label='Logout' />
+
+
+
+          </div>
         </div>
       </nav>
     );

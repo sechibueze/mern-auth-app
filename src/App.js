@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import AppRoutes from './AppRoutes';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import TweetFeed from './components/TweetFeed';
+
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
 
 
 class App extends Component {
-
   state = {}
-
   render() {
     return (
       <Provider store={store}>
-        <AppRoutes />
+        <Navbar />
+        <TweetFeed />
+        <Footer />
       </Provider>
     );
   }
