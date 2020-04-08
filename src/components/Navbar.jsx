@@ -19,11 +19,11 @@ class Navbar extends Component {
     return (
       <nav id='navbar' className={navlinksState}>
         <div className='container clearfix '>
-          <div className='logo'>Tweeters</div>
+          <div className='logo'>ThinkOut</div>
           <span className='menu-icon-toggler' onClick={this.toggleNavlinks}>MENU</span>
           <div className='navlinks'>
             <NavLink label='Tweets' />
-            {/* <NavLink label='Create' /> */}
+
             <CreateTweet />
             <RegisterModal />
             <LoginModal />

@@ -19,7 +19,6 @@ class TweetFeed extends Component {
         id: 3,
         title: 'The fight against COVID-19 continues',
         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, dolore!',
-
         tweetter: 'Samuel Chibueze'
       }
 

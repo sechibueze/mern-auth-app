@@ -5,8 +5,8 @@ class NavLink extends Component {
 
   render() {
     const { label } = this.props;
-    return (//onClick={this.props.onClick}
-      <span className='navlink' > {label} </span>
+    return (//
+      <span className='navlink' onClick={this.props.onClick}> {label} </span>
     );
   }
 }

@@ -3,15 +3,10 @@ import NavLink from '../NavLink';
 class CreateTweetModal extends Component {
   state = {
     isOpen: false,
-    tweet: ''
+    title: '',
+    content: ''
   }
-  componentDidUpdate(prevProps) {
 
-    // close modal if its open
-    // if (this.state.open) {
-    //   this.toggleModal();
-    // }
-  }
   closeModal = _ => {
     this.setState({ isOpen: !this.state.isOpen });
   }
@@ -25,20 +20,20 @@ class CreateTweetModal extends Component {
 
   handleCreateTweet = e => {
     e.preventDefault();
-    const { tweet } = this.state;
-
-    console.log('New Tweet', { tweet });
+    const { title, content } = this.state;
+    const tweet = { title, content };
+    console.log('New Tweet', tweet);
 
     this.toggleCreateTweetModal();
 
   }
   render() {
-    const { isOpen, tweet } = this.state;
-    const status = isOpen === true ? 'show' : '';
+    const { isOpen, title, content } = this.state;
+    const modalShowClass = isOpen === true ? 'show' : '';
     return (
       <Fragment>
         <NavLink label='Create' onClick={this.toggleCreateTweetModal} />
-        <div className={`modal ${status}`}>
+        <div className={`modal ${modalShowClass}`}>
 
           <div className='modal-content'>
             <div className='modal-header'>
@@ -48,33 +43,29 @@ class CreateTweetModal extends Component {
             <div className='modal-body'>
               <form onSubmit={this.handleCreateTweet}>
                 <div className='form-group'>
+                  <label htmlFor='lastname'>Title</label>
+                  <input
+                    onChange={this.handleChange}
+                    value={title}
+                    type='text'
+                    name='title'
+                    className='form-control'
+                    required placeholder='Enter your tweet title'
+                  />
+                </div>
+
+                <div className='form-group'>
                   <label htmlFor='tweet'>Add new Tweet</label>
-                  <textarea onChange={this.handleChange} value={tweet} cols='10' rows='8' name='tweet' className='form-control' required placeholder='Start typing...or paste your tweet' />
-                </div>
-                {/* 
-                <div className='form-group'>
-                  <label htmlFor='lastname'>Lastname</label>
-                  <input onChange={this.handleChange} value={lastname} type='text' name='lastname' className='form-control' required placeholder='Enter your lastname' />
+                  <textarea onChange={this.handleChange} value={content} cols='10' rows='8' name='content' className='form-control' required placeholder='Start typing...or paste your tweet' />
                 </div>
 
-                <div className='form-group'>
-                  <label htmlFor='email'>Email</label>
-                  <input onChange={this.handleChange} value={email} type='email' name='email' className='form-control' required placeholder='Enter your email address' />
-                </div>
 
                 <div className='form-group'>
-                  <label htmlFor='password'>Password</label>
-                  <input onChange={this.handleChange} value={password} type='password' name='password' className='form-control' required placeholder='Enter your password' />
-                </div> */}
-
-                <div className='form-group'>
-
                   <button type='submit' className='form-control btn btn-primary'> Create Tweet </button>
                 </div>
               </form>
             </div>
             <div className='modal-footer'>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, dolore!
             </div>
           </div>
         </div>

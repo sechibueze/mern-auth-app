@@ -3,15 +3,15 @@ import EditTweetModal from './modals/EditTweetModal';
 class Tweet extends Component {
   state = {}
   render() {
-    const { tweet, tweet: { title, content, tweetter } } = this.props;
+    const { tweet } = this.props;
     return (
       <div className='tweet'>
         <div className='tweet-header'>
-          <h3 className='tweet-title'> {title}</h3>
-          <span className='tweeter'>{tweetter}</span>
+          <h3 className='tweet-title'> {tweet.title}</h3>
+          <span className='tweeter'>{tweet.tweetter}</span>
         </div>
         <article className='tweet-content'>
-          {content}
+          {tweet.content}
         </article>
         <div className='tweet-footer'>
           <EditTweetModal tweet={tweet} />
