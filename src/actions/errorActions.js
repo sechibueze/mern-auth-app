@@ -1,11 +1,7 @@
 import { CLEAR_ERROR, SET_ERROR } from './types';
-export const setError = (type = SET_ERROR, error) => {
-  console.log('err', {
-    type,
-    error
-  })
+export const setError = (error) => {
   return {
-    type,
+    type: SET_ERROR,
     error
   };
 }

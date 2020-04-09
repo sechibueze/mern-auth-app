@@ -7,10 +7,15 @@ import TweetFeed from './components/TweetFeed';
 import store from './store';
 
 import './App.css';
+import { loadUser } from './actions/authActions';
 
 
 class App extends Component {
   state = {}
+  componentDidMount() {
+    console.log('%c App::componentDidMount', 'color:green', store.getState().auth.isLoading)
+    store.dispatch(loadUser());
+  }
   render() {
     return (
       <Provider store={store}>

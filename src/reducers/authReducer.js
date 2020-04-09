@@ -1,10 +1,9 @@
 import * as Types from '../actions/types';
 const initialState = {
-  token: null, //localStorage.getItem('token'),
-  isAuthenticated: localStorage.getItem('isAuthenticated') || undefined,
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
   isLoading: false,
-  user: {},
-  error: {}
+  user: {}
 };
 
 export default function (state = initialState, action) {
@@ -25,7 +24,8 @@ export default function (state = initialState, action) {
       localStorage.removeItem('token');
       return {
         ...state,
-        error: action.error
+        isAuthenticated: false,
+        user: {}
       };
 
     case Types.LOGOUT:

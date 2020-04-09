@@ -1,19 +1,37 @@
 import React, { Component, Fragment } from 'react';
 import NavLink from '../NavLink';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
+import PropTypes from 'prop-types';
 class RegisterModal extends Component {
   state = {
     isOpen: false,
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    message: ''
+  }
+
+  static propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    error: PropTypes.object,
+    isAuthenticated: PropTypes.bool
   }
   componentDidUpdate(prevProps) {
 
+    const { error, isAuthenticated } = this.props;
+    if (prevProps.error !== error) {
+      if (error.id === 'REGISTER_FAIL') {
+        this.setState({ message: error.message })
+      }
+    }
     // close modal if its open
-    // if (this.state.open) {
-    //   this.toggleModal();
-    // }
+    if (this.state.isOpen) {
+      if (isAuthenticated) {
+        this.toggleModal();
+      }
+    }
   }
   closeModal = _ => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -31,12 +49,13 @@ class RegisterModal extends Component {
     const { firstname, lastname, email, password } = this.state;
     const user = { firstname, lastname, email, password };
     console.log('Attempt register', user);
+    this.props.registerUser(user);
 
-    this.toggleRegisterModal();
+    // this.toggleRegisterModal();
 
   }
   render() {
-    const { isOpen, firstname, lastname, email, password } = this.state;
+    const { isOpen, firstname, lastname, email, password, message } = this.state;
     const status = isOpen === true ? 'show' : '';
     return (
       <Fragment>
@@ -50,6 +69,7 @@ class RegisterModal extends Component {
             </div>
             <div className='modal-body'>
               <form onSubmit={this.handleRegister}>
+                <p> {message} </p>
                 <div className='form-group'>
                   <label htmlFor='firstname'>Firstname</label>
                   <input onChange={this.handleChange} value={firstname} type='text' name='firstname' className='form-control' required placeholder='Enter your firstname' />
@@ -85,5 +105,8 @@ class RegisterModal extends Component {
     );
   }
 }
-
-export default RegisterModal;
+const mapStateToProps = state => ({
+  error: state.error.error,
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps, { registerUser })(RegisterModal);

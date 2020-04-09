@@ -1,17 +1,37 @@
 import React, { Component, Fragment } from 'react';
 import NavLink from '../NavLink';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loginUser } from '../../actions/authActions';
 class LoginModal extends Component {
   state = {
     isOpen: false,
     email: '',
-    password: ''
+    password: '',
+    message: ''
+  }
+  static propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    error: PropTypes.object,
+    isAuthenticated: PropTypes.bool
   }
   componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+    // check if there is a change
+    if (prevProps.error !== error) {
+      if (error.id === 'LOGIN_FAIL') {
+        this.setState({ message: error.message });
+      }
+    }
 
-    // close modal if its open
-    // if (this.state.open) {
-    //   this.toggleModal();
-    // }
+    // onClosing the login modal
+    if (this.state.isOpen) {
+      if (isAuthenticated) {
+        // close the modal
+        this.toggleLoginModal();
+      }
+    }
+
   }
   closeModal = _ => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -29,12 +49,11 @@ class LoginModal extends Component {
     const { email, password } = this.state;
     const login = { email, password };
     console.log('Attempt login', login);
-
-    this.toggleLoginModal();
+    this.props.loginUser(login);
 
   }
   render() {
-    const { isOpen, email, password } = this.state;
+    const { isOpen, email, password, message } = this.state;
     const status = isOpen === true ? 'show' : '';
     return (
       <Fragment>
@@ -48,6 +67,7 @@ class LoginModal extends Component {
             </div>
             <div className='modal-body'>
               <form onSubmit={this.handleLogin}>
+                <p> {message} </p>
                 <div className='form-group'>
                   <label htmlFor='email'>Email</label>
                   <input onChange={this.handleChange} value={email} type='email' name='email' className='form-control' required placeholder='Enter your email address' />
@@ -73,5 +93,8 @@ class LoginModal extends Component {
     );
   }
 }
-
-export default LoginModal;
+const mapStateToProps = state => ({
+  error: state.error.error,
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps, { loginUser })(LoginModal);

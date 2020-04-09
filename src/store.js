@@ -36,6 +36,6 @@ const store = createStore(
 
 // subscribe to store for changes
 store.subscribe(() => saveStateToLocalStorage({
-  isAuthenticated: store.getState().auth.isAuthenticated
+  error: "My initial state data"
 }));
 export default store;
